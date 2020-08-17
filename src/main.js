@@ -1,25 +1,31 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
-
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
+import store from './store'
 import './plugins/element.js'
-import zswl_ui from './components'
-
-import axios from 'axios'
-Vue.prototype.$http = axios
-
-Vue.use(zswl_ui)
+// import 'normalize.css/normalize.css'
+// import './assets/css/zc-normalize.less'
+import zcb_ui from './components'
+Vue.use(zcb_ui);
 
 require('./assets/css/normalize.less') 
 
-Vue.config.productionTip = false
+import axios from 'axios';
+Vue.prototype.$http = axios;
 
-/* eslint-disable no-new */
+axios.defaults.baseURL =   process.env.API_HOST;
+
+// console.log( process.env.API_HOST , process.env.NODE_ENV )
+Vue.config.productionTip = false;
+
+import message from "./components/component/index"
+import { postcss } from 'postcss-url'
+Vue.use(message);
+
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })
